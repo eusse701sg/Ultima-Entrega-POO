@@ -1,0 +1,66 @@
+print("Bienvenido\n")
+empleados=[]
+for a in range(0,100000):    
+    menu=input("MENÚ\n1. Agregar empleado.\n2. Consultar empleado.\n3. Modificar datos de empleado.\n4. Eliminar empleado.\n5. Guardar y Salir.\n\n¿Qué desea hacer? (Elegir entre opciones 1,2,3,4 y 5): ")
+    if menu=="1":
+        cedula=str(input("Ingrese cédula = "))
+        nombres=str(input("Ingrese nombres = "))
+        apellidos=str(input("Ingrese apellidos = "))
+        empleado=[cedula,nombres,apellidos]
+        empleados.append(empleado)
+
+    elif menu=="2":
+        buscar_cedula=str(input("¿Qué cedula desea buscar?: "))
+        disponibilidad=False
+        for empleado in empleados:
+            if buscar_cedula in empleado:
+                disponibilidad=True
+                print(f"Cedula = {empleado[0]}\nNombres = {empleado[1]}\nApellidos = {empleado[2]}")
+                break
+        if disponibilidad==False:
+            print("El empleado no se encuentra en la base de datos.")
+       
+    elif menu=="3":
+        buscar_cedula=str(input("¿Cuál es la cédula del empleado que desea MODIFICAR?: "))
+        disponibilidad=False
+        for empleado in empleados:
+            if buscar_cedula in empleado:
+                disponibilidad=True
+                cedula=str(input("Ingrese nueva cédula = "))
+                nombres=str(input("Ingrese nuevos nombres = "))
+                apellidos=str(input("Ingrese nuevos apellidos = "))
+                empleado[0]=cedula
+                empleado[1]=nombres
+                empleado[2]=apellidos
+                print("Empleado modificado con éxito.")
+                break
+        if disponibilidad==False:
+            print("El empleado no se encuentra en la base de datos.")
+
+
+
+    elif menu=="4":
+        contador=-1
+        buscar_cedula=str(input("¿Cuál es la cédula del empleado que desea ELIMINAR?: "))
+        disponibilidad=False
+        for empleado in empleados:
+            contador+=1
+            if buscar_cedula in empleado:
+                disponibilidad=True
+                empleados.pop(contador)
+                print("Empleado eliminado con éxito.")
+                break
+        if disponibilidad==False:
+            print("El empleado no se encuentra en la base de datos")
+
+
+    elif menu=="5":
+        archivo=open("empleados.txt","w")
+        for empleado in empleados:
+            archivo.write(f"Cedula = {empleado[0]}\nNombres = {empleado[1]}\nApellidos = {empleado[2]}\n-----------\n")
+        archivo.close
+        print("Hasta pronto.\n")
+        break
+    else:
+        print("\nHas elegido una opción no válida.\n")
+    
